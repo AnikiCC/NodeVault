@@ -1,11 +1,9 @@
-FROM denoland/deno:latest
+FROM node:23 AS builder
+COPY --from=denoland/deno:bin-2.2.3 /deno /usr/local/bin/deno
 
 WORKDIR /app
-
-# Копируем все файлы проекта
 COPY . .
 
-# Создаем .env файл с переменными окружения
 RUN echo "VITE_NODEVAULT_API_URL=http://backend:8080" > .env
 RUN echo "VITE_ADMIN_EMAIL=anikicg11@gmail.com" >> .env
 RUN echo "VITE_ADMIN_UID=admin" >> .env
@@ -17,12 +15,15 @@ RUN echo "VITE_FIREBASE_STORAGE_BUCKET=nodevaultnews.firebasestorage.app" >> .en
 RUN echo "VITE_FIREBASE_MESSAGING_SENDER_ID=542572189162" >> .env
 RUN echo "VITE_FIREBASE_APP_ID=1:542572189162:web:d1852465062281273cce93" >> .env
 
-# Устанавливаем зависимости с разрешением скриптов
 RUN deno install --allow-scripts
 RUN deno task build
-RUN deno cache --allow-import  _fresh/server.js
+RUN deno cache --allow-import _fresh/server.js 
+
+FROM denoland/deno:2.2.3
+USER deno
+WORKDIR /app
+COPY --from=builder /app .
 
 EXPOSE 8000
 
-# Запускаем продакшен сервер
 CMD ["serve", "-A", "_fresh/server.js"]
