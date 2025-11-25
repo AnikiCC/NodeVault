@@ -1,4 +1,4 @@
-FROM node:23 AS builder
+FROM node:latest AS builder
 COPY --from=denoland/deno:bin-2.2.3 /deno /usr/local/bin/deno
 
 WORKDIR /app
@@ -19,7 +19,7 @@ RUN deno install --allow-scripts
 RUN deno task build
 RUN deno cache --allow-import _fresh/server.js 
 
-FROM denoland/deno:2.2.3
+FROM denoland/deno:latest
 USER deno
 WORKDIR /app
 COPY --from=builder /app .
