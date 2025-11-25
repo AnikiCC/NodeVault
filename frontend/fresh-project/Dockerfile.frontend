@@ -17,7 +17,11 @@ RUN echo "VITE_FIREBASE_STORAGE_BUCKET=nodevaultnews.firebasestorage.app" >> .en
 RUN echo "VITE_FIREBASE_MESSAGING_SENDER_ID=542572189162" >> .env
 RUN echo "VITE_FIREBASE_APP_ID=1:542572189162:web:d1852465062281273cce93" >> .env
 
+RUN deno install
+RUN deno task build
+RUN deno cache --allow-import _fresh/server.js 
+
 EXPOSE 8000
 
 # Запускаем напрямую dev.ts вместо использования deno task
-CMD ["deno", "run", "-A", "--watch", "dev.ts"]
+CMD ["serve", "-A", "_fresh/server.js"]
