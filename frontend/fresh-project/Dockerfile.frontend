@@ -1,5 +1,5 @@
 FROM node:latest AS builder
-COPY --from=denoland/deno:bin-latest /deno /usr/local/bin/deno
+COPY --from=denoland/deno:latest /usr/local/bin/deno /usr/local/bin/deno
 
 WORKDIR /app
 COPY . .
