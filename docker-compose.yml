@@ -1,8 +1,16 @@
 services:
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    image: ghcr.io/anikicc/nodevault-backend:main
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile.backend
+    #ports:
+    #  - "8080:8080"
+    #volumes:
+    #  - nodevault_data:/app/data
+    #environment:
+    #  - NODEVAULT_STORAGE_DIR=/app/data
+    # - NODEVAULT_MAX_FILE_SIZE=524288000
     ports:
       - "8080:8080"
     volumes:
@@ -12,9 +20,16 @@ services:
       - NODEVAULT_MAX_FILE_SIZE=524288000
 
   frontend:
-    build:
-      context: ./frontend/fresh-project
-      dockerfile: Dockerfile.frontend
+    image: ghcr.io/anikicc/nodevault-frontend:main
+    #    build:
+    # context: ./frontend/fresh-project
+    #  dockerfile: Dockerfile.frontend
+    #ports:
+    #  - "8000:8000"
+    #environment:
+    #  - VITE_NODEVAULT_API_URL=http://backend:8080
+    #depends_on:
+    #  - backend
     ports:
       - "8000:8000"
     environment:
