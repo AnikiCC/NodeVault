@@ -18,7 +18,7 @@ RUN echo "VITE_FIREBASE_MESSAGING_SENDER_ID=542572189162" >> .env
 RUN echo "VITE_FIREBASE_APP_ID=1:542572189162:web:d1852465062281273cce93" >> .env
 
 # Устанавливаем зависимости с разрешением скриптов
-RUN deno install --allow-scripts -A -r
+RUN deno install --allow-scripts
 RUN deno task build --allow-scripts
 RUN deno cache --allow-import --allow-scripts _fresh/server.js
 
