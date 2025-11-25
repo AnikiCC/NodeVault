@@ -19,10 +19,10 @@ RUN echo "VITE_FIREBASE_APP_ID=1:542572189162:web:d1852465062281273cce93" >> .en
 
 # Устанавливаем зависимости с разрешением скриптов
 RUN deno install --allow-scripts
-RUN deno task build --allow-scripts
-RUN deno cache --allow-import --allow-scripts _fresh/server.js
+RUN deno task build
+RUN deno cache --allow-import  _fresh/server.js
 
 EXPOSE 8000
 
 # Запускаем продакшен сервер
-CMD ["deno", "run", "-A", "--allow-scripts", "_fresh/server.js"]
+CMD ["serve", "-A", "_fresh/server.js"]
