@@ -21,6 +21,7 @@ func main() {
 
 	// Создаем хранилище
 	store := storage.NewFileStorage(cfg.StorageDir)
+	defer store.Close()
 
 	// Запускаем очистку просроченных файлов
 	go func() {
@@ -37,8 +38,14 @@ func main() {
 	if err != nil {
 		os.Exit(1)
 	}
+	defer node.Close()
 
 	fileHandler := handlers.NewFileHandler(store, node, cfg)
+
+	// Настройка Gin
+	if os.Getenv("GIN_MODE") == "release" {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
 	r := gin.Default()
 
@@ -68,8 +75,15 @@ func main() {
 	go func() {
 		<-sigChan
 		node.Close()
+		store.Close()
 		os.Exit(0)
 	}()
 
-	r.Run(":8080")
+	// Получаем порт из переменных окружения
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	r.Run(":" + port)
 }

@@ -1,0 +1,23 @@
+FROM denoland/deno:latest
+
+WORKDIR /app
+
+# Копируем все файлы проекта
+COPY . .
+
+# Создаем .env файл с переменными окружения
+RUN echo "VITE_NODEVAULT_API_URL=http://backend:8080" > .env
+RUN echo "VITE_ADMIN_EMAIL=anikicg11@gmail.com" >> .env
+RUN echo "VITE_ADMIN_UID=admin" >> .env
+RUN echo "VITE_FIREBASE_API_KEY=AIzaSyA8mDAOMbTLDtzOX8oAG6lEXoMnKyAF2kI" >> .env
+RUN echo "VITE_FIREBASE_AUTH_DOMAIN=nodevaultnews.firebaseapp.com" >> .env
+RUN echo "VITE_FIREBASE_DATABASE_URL=https://nodevaultnews-default-rtdb.firebaseio.com" >> .env
+RUN echo "VITE_FIREBASE_PROJECT_ID=nodevaultnews" >> .env
+RUN echo "VITE_FIREBASE_STORAGE_BUCKET=nodevaultnews.firebasestorage.app" >> .env
+RUN echo "VITE_FIREBASE_MESSAGING_SENDER_ID=542572189162" >> .env
+RUN echo "VITE_FIREBASE_APP_ID=1:542572189162:web:d1852465062281273cce93" >> .env
+
+EXPOSE 8000
+
+# Запускаем напрямую dev.ts вместо использования deno task
+CMD ["deno", "run", "-A", "--watch", "dev.ts"]

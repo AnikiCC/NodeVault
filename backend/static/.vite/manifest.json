@@ -1,0 +1,89 @@
+{
+  "_encryption-wCP-1lWO.js": {
+    "file": "assets/encryption-wCP-1lWO.js",
+    "name": "encryption"
+  },
+  "_hooks.module-DVsaJQaE.js": {
+    "file": "assets/hooks.module-DVsaJQaE.js",
+    "name": "hooks.module"
+  },
+  "_i18n-yHiuP5cw.js": {
+    "file": "assets/i18n-yHiuP5cw.js",
+    "name": "i18n"
+  },
+  "_jsxRuntime.module-vrc9lv1r.js": {
+    "file": "assets/jsxRuntime.module-vrc9lv1r.js",
+    "name": "jsxRuntime.module",
+    "imports": [
+      "_hooks.module-DVsaJQaE.js"
+    ]
+  },
+  "fresh:client-entry": {
+    "file": "assets/client-entry-CISzZI1E.js",
+    "name": "client-entry",
+    "src": "fresh:client-entry",
+    "isEntry": true,
+    "imports": [
+      "_hooks.module-DVsaJQaE.js"
+    ],
+    "css": [
+      "assets/client-entry-22Ul2fh0.css"
+    ]
+  },
+  "islands/FileDownloadPage.tsx": {
+    "file": "assets/fresh-island__FileDownloadPage-BsaRvhKU.js",
+    "name": "fresh-island__FileDownloadPage",
+    "src": "islands/FileDownloadPage.tsx",
+    "isEntry": true,
+    "imports": [
+      "_hooks.module-DVsaJQaE.js",
+      "_encryption-wCP-1lWO.js",
+      "_i18n-yHiuP5cw.js",
+      "_jsxRuntime.module-vrc9lv1r.js"
+    ]
+  },
+  "islands/FileUploadIsland.tsx": {
+    "file": "assets/fresh-island__FileUploadIsland-A0NErLZw.js",
+    "name": "fresh-island__FileUploadIsland",
+    "src": "islands/FileUploadIsland.tsx",
+    "isEntry": true,
+    "imports": [
+      "_hooks.module-DVsaJQaE.js",
+      "_encryption-wCP-1lWO.js",
+      "_i18n-yHiuP5cw.js",
+      "_jsxRuntime.module-vrc9lv1r.js"
+    ]
+  },
+  "islands/HomeContent.tsx": {
+    "file": "assets/fresh-island__HomeContent-CIfaOVKf.js",
+    "name": "fresh-island__HomeContent",
+    "src": "islands/HomeContent.tsx",
+    "isEntry": true,
+    "imports": [
+      "_hooks.module-DVsaJQaE.js",
+      "_i18n-yHiuP5cw.js",
+      "_jsxRuntime.module-vrc9lv1r.js"
+    ]
+  },
+  "islands/LanguageSwitcher.tsx": {
+    "file": "assets/fresh-island__LanguageSwitcher-zZ_ccjlI.js",
+    "name": "fresh-island__LanguageSwitcher",
+    "src": "islands/LanguageSwitcher.tsx",
+    "isEntry": true,
+    "imports": [
+      "_hooks.module-DVsaJQaE.js",
+      "_i18n-yHiuP5cw.js",
+      "_jsxRuntime.module-vrc9lv1r.js"
+    ]
+  },
+  "islands/ThemeSwitcher.tsx": {
+    "file": "assets/fresh-island__ThemeSwitcher-Blph8HTz.js",
+    "name": "fresh-island__ThemeSwitcher",
+    "src": "islands/ThemeSwitcher.tsx",
+    "isEntry": true,
+    "imports": [
+      "_hooks.module-DVsaJQaE.js",
+      "_jsxRuntime.module-vrc9lv1r.js"
+    ]
+  }
+}
