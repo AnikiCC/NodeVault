@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  REPO_NAME: ${{ github.repository }}
+  USERNAME: anikicc
 
 jobs:
   build-and-push:
@@ -28,7 +28,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
+          username: ${{ env.USERNAME }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata
@@ -36,7 +36,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ env.REGISTRY }}/${{ env.REPO_NAME }}
+            ${{ env.REGISTRY }}/${{ env.USERNAME }}/nodevault-frontend
+            ${{ env.REGISTRY }}/${{ env.USERNAME }}/nodevault-backend
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
@@ -46,20 +47,22 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./frontend/fresh-project
-          dockerfile: ./frontend/fresh-project/Dockerfile.frontend
+          file: ./frontend/fresh-project/Dockerfile.frontend
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/nodevault-frontend:${{ steps.meta.outputs.version }}
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/nodevault-frontend:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and push backend
         uses: docker/build-push-action@v5
         with:
           context: .
-          dockerfile: Dockerfile.backend
+          file: Dockerfile.backend
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/nodevault-backend:${{ steps.meta.outputs.version }}
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/nodevault-backend:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
